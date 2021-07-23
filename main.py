@@ -81,7 +81,7 @@ def reGW():
             resText = font.render("Try Again, press space to continoe",1,(255,225,225))
         win.blit(resText,((sw//2-resText.get_width()//2),sh//2 - resText.get_height()//2))
         playAgainText = font.render("Press Space To Play Again",1,(255,255,255))
-        win.blit(playAgainText,sw)
+        win.blit(playAgainText,((sw//2-playAgainText.get_width()//2),sh//2+30))
     pygame.display.update()
 
 player = Paddle(sw/2-50,sh-100,100,20,(255,255,255))
