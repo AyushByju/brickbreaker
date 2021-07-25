@@ -9,6 +9,9 @@ back = pygame.image.load("background.jpeg")
 win = pygame.display.set_mode((sw, sh))
 pygame.display.set_caption("Breakout")
 
+bounce = pygame.mixer.Sound("hitGameSound.wav")
+bounce.set_volume(.2)
+
 clock = pygame.time.Clock()
 
 gameover = False
@@ -103,13 +106,17 @@ while run:
         if (ball.x >= player.x and ball.x <= player.x + player.w) or (ball.x + ball.w >= player.x and ball.x + ball.w <= player.x + player.w):
             if ball.y + ball.h >= player.y and ball.h <= player.y + player.h:
                 ball.yv *=-1
+                bounce.play()
 
         if ball.x + ball.w >= sw:
             ball.xv *= -1
+            bounce.play()
         if ball.x < 0:
             ball.xv *= -1
+            bounce.play()
         if ball.y <= 0:
             ball.yv *= -1
+            bounce.play()
 
     for brick in bricks:
         if(ball.x >= brick.x and ball.x <= brick.x + brick.w) or ball.x + ball.w >= brick.x and ball.x + ball.w <= brick.x + brick.w:
@@ -117,6 +124,7 @@ while run:
                 brick.visible = False
                 bricks.pop(bricks.index(brick))
                 ball.yv*=-1 
+                bounce.play()
 
     if ball.y> sh:
         gameover = True
